@@ -72,6 +72,12 @@ function Snowman({
   }
   const hidden = nWrong >= maxWrong ? "hidden" : "";
 
+  function reset() {
+    setAnswer(randomWord(words));
+    setGuessedLetters(new Set());
+    setNWrong(0);
+  }
+
   return (
     <div className="Snowman">
       <img src={images[nWrong]} alt={nWrong} />
@@ -87,6 +93,7 @@ function Snowman({
         {" "}
         {generateButtons()}
       </p>
+      <button onClick={reset}>Restart</button>
     </div>
   );
 }
