@@ -72,10 +72,16 @@ function Snowman({
   }
   const hidden = nWrong >= maxWrong ? "hidden" : "";
 
+  /** resets the game */
   function reset() {
     setAnswer(randomWord(words));
     setGuessedLetters(new Set());
     setNWrong(0);
+  }
+  /* shows win or lose message */
+  function showMsg() {
+    if (nWrong === maxWrong) return `you lose! answer: ${answer}`;
+    else if (!guessedWord().includes("_")) return `you won!`;
   }
 
   return (
@@ -83,12 +89,7 @@ function Snowman({
       <img src={images[nWrong]} alt={nWrong} />
       <p>Number wrong: {nWrong}</p>
       <p className="Snowman-word">{guessedWord()}</p>
-      {nWrong === maxWrong && (
-        <div>
-          <p>You lose! </p>
-          <p>{answer}</p>
-        </div>
-      )}
+      <p>{showMsg()}</p>
       <p id="letterButtonContainer" className={`${hidden}`}>
         {" "}
         {generateButtons()}
